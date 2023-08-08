@@ -6,7 +6,7 @@ import {
     fetchPropertiesFailure,
 } from '../actionTypes';
 
-const baseUrl = "https://scalloped-stellar-harpymimus.glitch.me"
+const baseUrl = "https://legendary-marred-crawdad.glitch.me"
 export const fetchProperties = (selectedParams) => async (dispatch) => {
     dispatch(fetchPropertiesRequest());
 

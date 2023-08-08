@@ -8,6 +8,11 @@ import { BiArea } from "react-icons/bi";
 export default function SingleProperty(props) {
     let { image, tag, price, title, address, beds, bathrooms, area, type } = props;
 
+    const handleImgLoadingError = (e) => {
+        // default image add, if associated image is not available...
+        e.target.src = 'https://a0.muscache.com/im/pictures/miso/Hosting-26117817/original/9da40e3c-5846-4359-bb41-05c27b09a8f5.jpeg?im_w=1200';
+    };
+
     const truncatedAddress = address.split(" ").slice(0, 4).join(" ");
     return (
         <Box
@@ -19,7 +24,9 @@ export default function SingleProperty(props) {
             position="relative"
             style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px - 20px, rgba(0, 0, 0, 0.3) 0px 30px 60px - 30px, rgba(10, 37, 64, 0.35) 0px - 2px 6px 0px inset" }}
         >
-            <Image src={image} alt={`Picture of ${title}`} roundedTop="lg" h={"200px"} w={"100%"} />
+            <Image src={image} alt={`Picture of ${title}`}
+                onError={(e) => handleImgLoadingError(e)}
+                roundedTop="lg" h={"200px"} w={"100%"} />
 
             <Box p="6">
                 <Box display="flex" alignItems="baseline" mt={"-50px"} >

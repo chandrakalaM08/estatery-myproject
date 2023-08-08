@@ -44,7 +44,9 @@ const SearchFilterSection = ({ handleFiltersChange, setSelectedFilters, selected
 
                 <FormControl width="250px" fontSize={"15px"} color={"gray.500"} lineHeight={"6px"}>
                     <FormLabel htmlFor="dateField">When</FormLabel>
-                    <Input type="date" id="dateField" name="availableDate" lineHeight={"18px"} onChange={handleChange} value={selectedFilters.availableDate} />
+                    <Input type="date" id="dateField" name="availableDate"
+                        min={new Date().toISOString().split('T')[0]}
+                        lineHeight={"18px"} onChange={handleChange} value={selectedFilters.availableDate} />
                 </FormControl>
 
                 <FormControl width="250px">

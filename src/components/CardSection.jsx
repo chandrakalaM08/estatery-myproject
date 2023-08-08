@@ -23,6 +23,7 @@ const CardSection = () => {
         type: '',
     });
 
+    console.log("properties,", typeof properties, properties.length, properties)
     // Making a param object here for applying filtering
 
     let paramsObject = {};
@@ -63,7 +64,10 @@ const CardSection = () => {
 
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div>
+            <h1> Error occured : error</h1>
+            <h2>Kindly refresh ...!!!</h2>
+        </div>;
     }
 
     return (<>
@@ -87,7 +91,14 @@ const CardSection = () => {
 
         {loading ? <Loader /> :
             <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing="4" w={"90%"} margin={"auto"} >
-                {properties?.map((property) => {
+                {properties.length === 0 ?
+                    <div style={{ display: "flex", width: "300%", justifyContent: 'center', flexDirection: "column" }}>
+                        <img src='https://as1.ftcdn.net/v2/jpg/05/17/31/54/1000_F_517315479_5APCsHqS3fFO0NAHewzDu9XS8Y2PhLBy.jpg' width={"220px"} />
+                        <h1 fontSize={"95px"}>
+                            No Match Found For Selected Criteria ...
+                        </h1>
+                    </div>
+                    : properties.map((property) => {
                     return <SingleProperty {...property} key={property.id} />
                 })}
             </SimpleGrid>
