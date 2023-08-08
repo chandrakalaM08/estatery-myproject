@@ -1,0 +1,24 @@
+
+import axios from 'axios';
+import {
+    fetchPropertiesRequest,
+    fetchPropertiesSuccess,
+    fetchPropertiesFailure,
+} from '../actionTypes';
+
+const baseUrl = "https://scalloped-stellar-harpymimus.glitch.me"
+export const fetchProperties = (selectedParams) => async (dispatch) => {
+    dispatch(fetchPropertiesRequest());
+
+    try {
+        console.log("params inside action", selectedParams)
+        const response = await axios.get('/properties', {
+            baseURL: baseUrl,
+            params: selectedParams
+        });
+
+        dispatch(fetchPropertiesSuccess(response.data));
+    } catch (error) {
+        dispatch(fetchPropertiesFailure(error.message));
+    }
+};
