@@ -21,7 +21,8 @@ const SearchFilterSection = ({ handleFiltersChange, setSelectedFilters, selected
             style={{
                 display: "flex", justifyContent: "space-around", alignContent: "center",
                 marginBottom: "25px",
-                marginTop: "30px"
+                marginTop: "30px",
+
             }}>
             <HStack spacing={8} align="center"  >
                 <FormControl width="250px">

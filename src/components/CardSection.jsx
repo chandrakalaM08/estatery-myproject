@@ -6,6 +6,7 @@ import SingleProperty from './SingleProperty'
 import { fetchProperties } from '../redux/Reducer/PropertyActions';
 import { setFilters, setSearchQuery } from '../redux/actionTypes';
 import { SimpleGrid } from '@chakra-ui/react';
+import Loader from './Loader';
 const CardSection = () => {
 
     const dispatch = useDispatch();
@@ -29,9 +30,6 @@ const CardSection = () => {
     if (filters.availableDate) {
         let searchDate = filters.availableDate
         searchDate = moment(searchDate).format('DD-MM-YYYY')
-        console.log("parsing date", searchDate)
-        // let searchDate = new Date(filters.availableDate)
-        // searchDate = searchDate.getDate() + "-" + searchDate.getMonth() + "-" + searchDate.getFullYear()
         paramsObject.availableDate = searchDate
     }
 
@@ -62,9 +60,7 @@ const CardSection = () => {
         dispatch(setSearchQuery(searchTerm));
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+
 
     if (error) {
         return <div>Error: {error}</div>;
@@ -72,7 +68,9 @@ const CardSection = () => {
 
     return (<>
         <div style={{ width: "95%", margin: "auto", marginTop: "30px" }}>
-            <div style={{ width: "95%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px" }}>
+            <div style={{
+                width: "95%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px",
+            }}>
                 <h1 style={{ fontSize: "35px", fontWeight: "600", marginLeft: "58px", marginTop: "15px" }}>Search properties to rent</h1>
                 <input type='text' placeholder='Search with Search Bar' style={{
                     border: "1px solid grey",
@@ -86,11 +84,14 @@ const CardSection = () => {
         <SearchFilterSection handleFiltersChange={handleFiltersChange}
             selectedFilters={selectedFilters}
             setSelectedFilters={setSelectedFilters} />
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing="4" w={"90%"} margin={"auto"} >
-            {properties?.map((property) => {
-                return <SingleProperty {...property} key={property.id} />
-            })}
-        </SimpleGrid>
+
+        {loading ? <Loader /> :
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing="4" w={"90%"} margin={"auto"} >
+                {properties?.map((property) => {
+                    return <SingleProperty {...property} key={property.id} />
+                })}
+            </SimpleGrid>
+        }
     </>
 
     )

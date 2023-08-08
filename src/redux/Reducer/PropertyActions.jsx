@@ -11,7 +11,6 @@ export const fetchProperties = (selectedParams) => async (dispatch) => {
     dispatch(fetchPropertiesRequest());
 
     try {
-        console.log("params inside action", selectedParams)
         const response = await axios.get('/properties', {
             baseURL: baseUrl,
             params: selectedParams
